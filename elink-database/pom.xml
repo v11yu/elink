@@ -9,9 +9,9 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>elink-mysql</artifactId>
+	<artifactId>elink-database</artifactId>
 
-	<name>elink-mysql</name>
+	<name>elink-database</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

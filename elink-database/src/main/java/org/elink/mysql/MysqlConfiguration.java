@@ -25,7 +25,7 @@ public class MysqlConfiguration {
 	@Bean
 	DriverManagerDataSource dataSource(){
 		return new DriverManagerDataSource("com.mysql.jdbc.Driver", 
-				"jdbc:mysql://192.168.2.23:3306/dome?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true", 
+				"jdbc:mysql://192.168.2.23:3306/entity?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true", 
 				"contexttrec", 
 				"contexttrec");
 	}
