@@ -20,7 +20,6 @@
     <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
 </settings>
 <typeAliases>
-    <package name="org.domeos.user.model"/>
-    <package name="org.domeos.env.model"/>
+    <package name="org.elink.database.model"/>
 </typeAliases>
 </configuration>

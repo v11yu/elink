@@ -1,4 +1,4 @@
-package org.elink.mysql.utils;
+package org.elink.database.mysql.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

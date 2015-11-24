@@ -1,11 +1,11 @@
-package org.elink.mysql.mapper;
+package org.elink.database.mysql.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.elink.mysql.model.EntityInfo;
-import org.elink.mysql.model.EntitySource;
+import org.elink.database.model.EntityInfo;
+import org.elink.database.model.EntitySource;
 import org.springframework.stereotype.Repository;
 /**
  * 
