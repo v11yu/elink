@@ -1,4 +1,4 @@
-package org.elink.mysql;
+package org.elink.database;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
