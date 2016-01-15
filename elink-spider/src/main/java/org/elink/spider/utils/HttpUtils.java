@@ -1,0 +1,102 @@
+package org.elink.spider.utils;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.util.EntityUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+/**
+ * httpclient 请求时，常用方法工具类
+ * @author v11
+ *
+ */
+public class HttpUtils {
+	/**
+	 * 附带浏览器header信息的HttpGet
+	 * @param url 请求地址
+	 * @return
+	 */
+	public HttpGet generateHttpGet(String url){
+		HttpGet httpGet = new HttpGet(url);
+		httpGet.setHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; rv:16.0) Gecko/20100101 Firefox/16.0");
+		httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
+		return httpGet;
+	}
+	/**
+	 * 附带浏览器header信息的HttpPost
+	 * @param url 请求地址
+	 * @return
+	 */
+	public HttpPost generateHttpPost(String url){
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; rv:16.0) Gecko/20100101 Firefox/16.0");
+		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+		return httpPost;
+	}
+	/**
+	 * 根据HttpResponse返回网页源码
+	 * @param res 
+	 * @return 网页源码
+	 */
+	public String getResponseBody(HttpResponse res){
+		HttpEntity entity = res.getEntity();
+		if(entity != null){
+			String content;
+			try {
+				content = EntityUtils.toString(entity,"UTF-8");
+				return content;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	/**
+	 * 释放HttpResponse资源
+	 * @param res
+	 */
+	public void release(HttpResponse res){
+		try {
+			EntityUtils.consume(res.getEntity());
+		} catch (IOException e) {
+			Log.error(e.toString());
+		}
+	}
+	public static String encode(String str){
+		try {
+			return URLEncoder.encode(str, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			Log.error("异常encode"+e);
+			return "";
+		}
+	}
+	public static Document getDocument(String url){
+		try {
+			return Jsoup.connect(url).get();
+		} catch (IOException e) {
+			for(int i=0;i<5;i++){
+				try {
+					return Jsoup.connect(url).get();
+				} catch (IOException e1) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+				}
+			}
+		}
+		return null;
+	}
+}
