@@ -5,10 +5,10 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.types.ObjectId;
 
-public class Entity {
+public class HuDongEntity {
 	ObjectId id;
 	String name;
-	List<ObjectId> tagIds;
+	List<String> preTags;
 	List<String> tagNames;
 	String url;
 	public ObjectId getId() {
@@ -23,11 +23,11 @@ public class Entity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<ObjectId> getTagIds() {
-		return tagIds;
+	public List<String> getPreTags() {
+		return preTags;
 	}
-	public void setTagIds(List<ObjectId> tagIds) {
-		this.tagIds = tagIds;
+	public void setPreTags(List<String> preTags) {
+		this.preTags = preTags;
 	}
 	public List<String> getTagNames() {
 		return tagNames;

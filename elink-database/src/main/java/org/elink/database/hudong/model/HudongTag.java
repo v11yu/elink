@@ -5,14 +5,21 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.types.ObjectId;
 
-public class Tag {
+public class HudongTag {
 	ObjectId id;
 	ObjectId fatherId;
 	List<ObjectId> child;
 	String name;
 	String url;
 	List<String> curl;
+	List<String> cname;
 	
+	public List<String> getCname() {
+		return cname;
+	}
+	public void setCname(List<String> cname) {
+		this.cname = cname;
+	}
 	public List<String> getCurl() {
 		return curl;
 	}

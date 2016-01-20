@@ -3,8 +3,8 @@ package org.elink.spider.hudong.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.elink.database.hudong.model.Entity;
-import org.elink.database.hudong.model.Tag;
+import org.elink.database.hudong.model.HuDongEntity;
+import org.elink.database.hudong.model.HudongTag;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,19 +13,6 @@ import org.jsoup.select.Elements;
 public class HuDongParserImpl implements HuDongParser{
 
 	
-
-	@Override
-	public List<String> getSubTagClassUrl(Document doc) {
-		List<String> curl =new ArrayList<String>();
-		
-		return curl;
-	}
-	@Override
-	public List<Tag> getSubTagClass(Document doc) {
-		List<Tag> curl =new ArrayList<Tag>();
-		
-		return curl;
-	}
 
 	@Override
 	public List<String> getSubTagClassName(Document doc) {
@@ -49,51 +36,17 @@ public class HuDongParserImpl implements HuDongParser{
 		}
 		return curl;
 	}
-	@Override
-	public List<String> getSuperClass(Document doc) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
-	public List<String> getEntityName(Document doc) {
-		Elements es = doc.getElementsByClass("link_blue");
-		Elements tags = es.get(0).getElementsByTag("dd");
-		
-		List<String> res = new ArrayList<String>();
-		for(Element e :tags){
-			Tag tag = new Tag();
-			String url = e.getElementsByTag("a").attr("href");
-			if(url.equals("javascript:void(0);")) continue;
-			res.add(e.text().trim());
-		}
-		return res;
-	}
-
-	@Override
-	public List<String> getEntityUrl(Document doc) {
-		Elements es = doc.getElementsByClass("link_blue");
-		Elements tags = es.get(0).getElementsByTag("dd");
-		
-		List<String> res = new ArrayList<String>();
-		for(Element e :tags){
-			Tag tag = new Tag();
-			String url = e.getElementsByTag("a").attr("href");
-			if(url.equals("javascript:void(0);")) continue;
-			res.add(url);
-		}
-		return res;
-	}
-
-	@Override
-	public List<Entity> getEntity(Document doc) {
+	public List<HuDongEntity> getEntity(Document doc) {
 		// TODO Auto-generated method stub
 		Elements es = doc.getElementsByClass("link_blue");
 		Elements tags = es.get(0).getElementsByTag("dd");
 		
-		List<Entity> res = new ArrayList<Entity>();
+		List<HuDongEntity> res = new ArrayList<HuDongEntity>();
 		for(Element e :tags){
-			Entity en = new Entity();
+			HuDongEntity en = new HuDongEntity();
 			String url = e.getElementsByTag("a").attr("href");
 			if(url.equals("javascript:void(0);")) continue;
 			en.setName(e.text().trim());
@@ -101,6 +54,13 @@ public class HuDongParserImpl implements HuDongParser{
 			res.add(en);
 		}
 		return res;
+	}
+
+
+	@Override
+	public List<String> getEntityTag(Document doc) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
