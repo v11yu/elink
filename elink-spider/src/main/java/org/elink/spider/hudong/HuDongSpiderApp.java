@@ -43,7 +43,7 @@ public class HuDongSpiderApp {
 		for(HuDongEntity e:entitys){
 			e.setPreTags(nowTags);
 			e.setTagNames(hp.getEntityTag(listDoc));
-			//buildAndSaveEntity(e);
+			buildAndSaveEntity(e);
 		}
 		
 		
@@ -67,7 +67,7 @@ public class HuDongSpiderApp {
 	 * @return
 	 */
 	HudongTag saveTag(HudongTag tag){
-		return tag;
+		return hbs.saveTag(tag);
 	}
 	List<String> getNowTags(List<String> preTags,String tagName){
 		List<String> nowTags = new ArrayList<String>(preTags);

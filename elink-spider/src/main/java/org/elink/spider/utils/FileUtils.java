@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class FileUtils {
@@ -18,11 +21,20 @@ public class FileUtils {
 				cin = new BufferedReader(new FileReader(file));
 			} else if (type.equals("out")) {
 				out = new BufferedWriter(new FileWriter(file, false));
-			} else {
+			} else if(type.equals("append")){
+				out = new BufferedWriter(new FileWriter(file,true));
+			}else {
 				throw new Exception();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	public static void append(String filepath,String line){
+		try {
+		    Files.write(Paths.get(filepath), line.getBytes(), StandardOpenOption.APPEND);
+		}catch (IOException e) {
+			Log.info(e+" ");
 		}
 	}
 	public void close() {

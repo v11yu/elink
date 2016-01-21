@@ -15,7 +15,8 @@ public class GetEntityTagTest {
 		Document doc = Jsoup.connect(url).get();
 		Elements es = doc.getElementsByClass("h27");
 		System.out.println(es.text());
-		for(Element e :es){
+		Elements as = es.get(0).getElementsByTag("a");
+		for(Element e :as){
 			System.out.println(e.text());
 		}
 	}
