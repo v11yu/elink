@@ -9,7 +9,7 @@ import org.elink.database.mongodb.repository.impl.BasicRepository;
 import org.elink.database.mysql.MySqlRootConfiguration;
 import org.elink.database.mysql.mapper.EntityInfoMapper;
 import org.elink.database.mysql.mapper.EntitySourceMapper;
-import org.elink.database.mysql.utils.Log;
+import org.elink.database.utils.Log;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

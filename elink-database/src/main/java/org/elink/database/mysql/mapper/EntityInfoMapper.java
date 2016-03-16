@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.elink.database.model.EntityInfo;
+import org.elink.database.model.MySQLEntityInfo;
 import org.elink.database.model.EntitySource;
 import org.springframework.stereotype.Repository;
 /**
@@ -14,12 +14,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EntityInfoMapper {
 	@Select("select * from entity_info")
-	public List<EntityInfo> getAll();
+	public List<MySQLEntityInfo> getAll();
 	@Select("select * from entity_info where entity_id=#{id}")
-	public List<EntityInfo> getById(
+	public List<MySQLEntityInfo> getById(
 			@Param("id") Integer id);
 	@Select("select * from entity_info limit #{bg},#{num}")
-	public List<EntityInfo> getByPage(@Param("bg") Integer bg,@Param("num") Integer num);
+	public List<MySQLEntityInfo> getByPage(@Param("bg") Integer bg,@Param("num") Integer num);
 	
 	
 }

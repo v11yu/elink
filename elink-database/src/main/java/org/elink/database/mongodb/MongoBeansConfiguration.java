@@ -2,6 +2,9 @@ package org.elink.database.mongodb;
 
 import org.elink.database.hudong.model.HuDongEntity;
 import org.elink.database.hudong.model.HudongTag;
+import org.elink.database.model.AttributeNameInfo;
+import org.elink.database.model.AttributePairsInfo;
+import org.elink.database.model.EntityInfo;
 import org.elink.database.model.EntitySource;
 import org.elink.database.model.PageInfo;
 import org.elink.database.mongodb.repository.impl.BasicRepository;
@@ -36,27 +39,40 @@ public class MongoBeansConfiguration {
 		return new BasicRepository<PageInfo>(PageInfo.class,pageInfoConvertor());
 	}
 	
+	
 	/*
-	 * hudong entity 
+	 * EntityInfo
 	 */
 	@Bean
-	DBConvertor<HuDongEntity> HudongEntityConvertor(){
-		return new DBConvertor<>(HuDongEntity.class);
+	DBConvertor<EntityInfo> entityInfoConvertor(){
+		return new DBConvertor<>(EntityInfo.class);
 	}
 	@Bean
-	BasicRepository<HuDongEntity> HudongEntityDao(){
-		return new BasicRepository<>(HuDongEntity.class, HudongEntityConvertor());
+	BasicRepository<EntityInfo> entityInfoDao(){
+		return new BasicRepository<>(EntityInfo.class, entityInfoConvertor());
 	}
 	
 	/*
-	 * hudong tag
+	 * attribute info
 	 */
 	@Bean
-	DBConvertor<HudongTag> HudongTagConvertor(){
-		return new DBConvertor<>(HudongTag.class);
+	DBConvertor<AttributePairsInfo> attributePairsInfoConvertor(){
+		return new DBConvertor<>(AttributePairsInfo.class);
 	}
 	@Bean
-	BasicRepository<HudongTag> HudongTagDao(){
-		return new BasicRepository<>(HudongTag.class, HudongTagConvertor());
+	BasicRepository<AttributePairsInfo> attributePairsInfoDao(){
+		return new BasicRepository<>(AttributePairsInfo.class, attributePairsInfoConvertor());
+	}
+	
+	/*
+	 * attribute name
+	 */
+	@Bean
+	DBConvertor<AttributeNameInfo> attributeNameInfoConvertor(){
+		return new DBConvertor<>(AttributeNameInfo.class);
+	}
+	@Bean
+	BasicRepository<AttributeNameInfo> attributeNameInfoDao(){
+		return new BasicRepository<>(AttributeNameInfo.class, attributeNameInfoConvertor());
 	}
 }

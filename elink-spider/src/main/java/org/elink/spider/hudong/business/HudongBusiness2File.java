@@ -55,4 +55,10 @@ public class HudongBusiness2File implements HudongBusiness {
 		}
 
 	}
+
+	@Override
+	public List<HuDongEntity> getAllList() {
+		// TODO Auto-generated method stub
+		return new ArrayList<HuDongEntity>();
+	}
 }

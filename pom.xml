@@ -89,7 +89,8 @@
     <module>elink-spider</module>
     <module>elink-extractor</module>
     <module>elink-database</module>
-	</modules>
+    <module>elink-analysis</module>
+  </modules>
 	<build>
 		<plugins>
 			<plugin>

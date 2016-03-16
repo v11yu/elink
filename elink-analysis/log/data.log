@@ -1,0 +1,22 @@
+[0310 10:11:40 INFO ] [main--org.springframework.context.annotation.AnnotationConfigApplicationContext:515 ] - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@a71081: startup date [Thu Mar 10 10:11:40 CST 2016]; root of context hierarchy
+[0310 10:11:41 INFO ] [main--org.springframework.jdbc.datasource.DriverManagerDataSource:153 ] - Loaded JDBC driver: com.mysql.jdbc.Driver
+[0310 10:11:42 INFO ] [main--org.springframework.jdbc.datasource.DriverManagerDataSource:153 ] - Loaded JDBC driver: com.mysql.jdbc.Driver
+[0310 10:11:42 INFO ] [main--org.elink.analysis.utils.Log:7 ] - 53422
+[0310 16:24:52 INFO ] [main--org.springframework.context.annotation.AnnotationConfigApplicationContext:515 ] - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1bd815b: startup date [Thu Mar 10 16:24:52 CST 2016]; root of context hierarchy
+[0310 16:24:53 INFO ] [main--org.springframework.jdbc.datasource.DriverManagerDataSource:153 ] - Loaded JDBC driver: com.mysql.jdbc.Driver
+[0310 16:24:54 INFO ] [main--org.springframework.jdbc.datasource.DriverManagerDataSource:153 ] - Loaded JDBC driver: com.mysql.jdbc.Driver
+[0310 16:24:54 INFO ] [main--org.elink.analysis.utils.Log:7 ] - 53422
+[0310 16:26:21 INFO ] [main--org.elink.analysis.utils.Log:7 ] - set size is 5992
+[0310 16:40:26 INFO ] [main--org.springframework.context.annotation.AnnotationConfigApplicationContext:515 ] - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1bd815b: startup date [Thu Mar 10 16:40:26 CST 2016]; root of context hierarchy
+[0310 16:40:27 INFO ] [main--org.springframework.jdbc.datasource.DriverManagerDataSource:153 ] - Loaded JDBC driver: com.mysql.jdbc.Driver
+[0310 16:40:28 INFO ] [main--org.springframework.jdbc.datasource.DriverManagerDataSource:153 ] - Loaded JDBC driver: com.mysql.jdbc.Driver
+[0310 16:41:22 INFO ] [main--org.springframework.context.annotation.AnnotationConfigApplicationContext:515 ] - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1bd815b: startup date [Thu Mar 10 16:41:22 CST 2016]; root of context hierarchy
+[0310 16:41:23 INFO ] [main--org.springframework.jdbc.datasource.DriverManagerDataSource:153 ] - Loaded JDBC driver: com.mysql.jdbc.Driver
+[0310 16:41:24 INFO ] [main--org.springframework.jdbc.datasource.DriverManagerDataSource:153 ] - Loaded JDBC driver: com.mysql.jdbc.Driver
+[0310 16:41:24 INFO ] [main--org.elink.analysis.utils.Log:7 ] - 53422
+[0310 16:42:40 INFO ] [main--org.elink.analysis.utils.Log:7 ] - set size is 5992
+[0310 17:00:33 INFO ] [main--org.springframework.context.annotation.AnnotationConfigApplicationContext:515 ] - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1bd815b: startup date [Thu Mar 10 17:00:33 CST 2016]; root of context hierarchy
+[0310 17:00:34 INFO ] [main--org.springframework.jdbc.datasource.DriverManagerDataSource:153 ] - Loaded JDBC driver: com.mysql.jdbc.Driver
+[0310 17:00:35 INFO ] [main--org.springframework.jdbc.datasource.DriverManagerDataSource:153 ] - Loaded JDBC driver: com.mysql.jdbc.Driver
+[0310 17:00:35 INFO ] [main--org.elink.analysis.utils.Log:7 ] - 53422
+[0310 17:01:30 INFO ] [main--org.elink.analysis.utils.Log:7 ] - set size is 2659

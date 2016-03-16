@@ -1,76 +1,51 @@
 package org.elink.database.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.ibatis.annotations.MapKey;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 
 public class EntityInfo {
-
-	private int entity_id;
-	private String entity_name;
-	private String disambiguation;
-	private String abstact;
-	private String image;
-	private int hasInfoBox;
-	private int attriNum;
+	@Id
+	ObjectId id;
+	String url;
+	String entity_name;
+	String source;
+	Integer hasInfo;
 	
-	public int getEntity_id() {
-		return entity_id;
+	public ObjectId getId() {
+		return id;
 	}
-
-	public void setEntity_id(int entity_id) {
-		this.entity_id = entity_id;
+	public void setId(ObjectId id) {
+		this.id = id;
 	}
-
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public String getEntity_name() {
 		return entity_name;
 	}
-
 	public void setEntity_name(String entity_name) {
 		this.entity_name = entity_name;
 	}
-
-	public String getDisambiguation() {
-		return disambiguation;
+	public String getSource() {
+		return source;
 	}
-
-	public void setDisambiguation(String disambiguation) {
-		this.disambiguation = disambiguation;
+	public void setSource(String source) {
+		this.source = source;
 	}
-
-	public String getAbstact() {
-		return abstact;
+	
+	public Integer getHasInfo() {
+		return hasInfo;
 	}
-
-	public void setAbstact(String abstact) {
-		this.abstact = abstact;
+	public void setHasInfo(Integer hasInfo) {
+		this.hasInfo = hasInfo;
 	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public int getHasInfoBox() {
-		return hasInfoBox;
-	}
-
-	public void setHasInfoBox(int hasInfoBox) {
-		this.hasInfoBox = hasInfoBox;
-	}
-
-	public int getAttriNum() {
-		return attriNum;
-	}
-
-	public void setAttriNum(int attriNum) {
-		this.attriNum = attriNum;
-	}
-
 	@Override
 	public String toString() {
+		// TODO Auto-generated method stub
 		return ToStringBuilder.reflectionToString(this);
 	}
 }

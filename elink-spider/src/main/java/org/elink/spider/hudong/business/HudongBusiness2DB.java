@@ -13,12 +13,15 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+
 public class HudongBusiness2DB implements HudongBusiness{
-	BasicRepository hudongEntityDao = (BasicRepository) SpringBeanUtils.getContext().getBean("HudongEntityDao");
+	BasicRepository<HuDongEntity> hudongEntityDao = (BasicRepository) SpringBeanUtils.getContext().getBean("hudongEntityDao");
 	@Override
 	public HudongTag saveTag(HudongTag tag) {
 		// TODO Auto-generated method stub
-		return null;
+		return tag;
 	}
 
 	@Override
@@ -41,14 +44,22 @@ public class HudongBusiness2DB implements HudongBusiness{
 			}
 			en.setTagNames(tags);
 			System.out.println(tags);
-			
+			hudongEntityDao.saveAndUpdate(en);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.error(e);
+			Log.error(en.getName()+" \n"+en.getUrl()+" "+e);
 		}finally{
 
 		}
+	}
+
+	@Override
+	public List<HuDongEntity> getAllList() {
+		// TODO Auto-generated method stub
+		DBCursor cursor = hudongEntityDao.findByAll();
+		List<HuDongEntity> res = hudongEntityDao.dbobj2Entity(cursor);
+		return res;
 	}
 
 

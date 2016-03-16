@@ -89,6 +89,7 @@ public class HttpUtils {
 					return Jsoup.connect(url).get();
 				} catch (IOException e1) {
 					try {
+						Log.error("try to connection "+i+" "+url);
 						Thread.sleep(1000);
 					} catch (InterruptedException e2) {
 						// TODO Auto-generated catch block

@@ -8,22 +8,24 @@ import org.bson.types.ObjectId;
 import org.elink.database.hudong.model.HuDongEntity;
 import org.elink.database.hudong.model.HudongTag;
 import org.elink.spider.hudong.business.HudongBusiness;
+import org.elink.spider.hudong.business.HudongBusiness2DB;
 import org.elink.spider.hudong.business.HudongBusiness2File;
 import org.elink.spider.hudong.parser.*;
 import org.elink.spider.utils.FileUtils;
 import org.elink.spider.utils.HttpUtils;
+import org.elink.spider.utils.Log;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class HuDongSpiderApp {
 	String baseClassUrl = "http://fenlei.baike.com/";
 	HuDongParser hp = new HuDongParserImpl();
-	HudongBusiness hbs = new HudongBusiness2File();
+	HudongBusiness hbs = new HudongBusiness2DB();
 	void dfs(String tagName,ObjectId father,List<String> preTags) throws IOException{
 		List<String> nowTags = getNowTags(preTags,tagName);
 		// build tag
 		String tagUrl = baseClassUrl+HttpUtils.encode(tagName);
-		System.out.println(tagUrl);
+		Log.info(tagUrl);
 		Document doc  = HttpUtils.getDocument(tagUrl);
 		HudongTag tag = new HudongTag();
 		tag.setFatherId(father);

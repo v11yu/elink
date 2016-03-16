@@ -1,38 +1,18 @@
 package org.elink.spider;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.io.IOException;
+
+import org.elink.spider.utils.Log;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.junit.Test;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+public class AppTest {
+	public static void main(String[] args) throws IOException {
+		Document doc =Jsoup.connect("http://fenlei.baike.com/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8").get();
+		Log.info(doc.text());
+	}
 }
