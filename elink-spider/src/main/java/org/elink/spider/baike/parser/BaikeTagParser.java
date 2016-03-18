@@ -16,7 +16,6 @@ public class BaikeTagParser {
 	public List<String> getSubTag(Document doc){
 		Elements es = doc.getElementsByClass("category-title");
 		List<String> tags = new ArrayList<>();
-		Log.info("category size"+ es.size());
 		int idx = -1;
 		for(int i=0;i<es.size();i++){
 			Element e = es.get(i);

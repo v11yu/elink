@@ -36,7 +36,7 @@ public class BaikeTagSpiderApp {
 			for (Element e : es) {
 				Pname pn = new Pname();
 				String entityUrl = eip.getCorrectUrl(e.attr("href"));
-				pn.setName(e.text());
+				pn.setName(e.text().trim());
 				pn.setUrl(entityUrl);
 				pn.setTags(tags);
 				pnameBusiness.savePname(pn);

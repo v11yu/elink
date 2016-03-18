@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.elink.database.pname.model.Pname;
+import org.elink.spider.utils.HttpUtils;
 import org.elink.spider.utils.Log;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -21,6 +22,14 @@ public class EntityInfoParser {
 		return url;
 	}
 	/**
+	 * 统一将url变成baike.baidu.com/item/*形式
+	 * @param pn
+	 * @return
+	 */
+	public String getUrlFromPname(Pname pn){
+		return "http://baike.baidu.com/item/"+HttpUtils.encode(pn.getName());
+	}
+	/**
 	 * 判断是否有infobox信息
 	 */
 	
@@ -35,14 +44,13 @@ public class EntityInfoParser {
 	 */
 	public int checkMulti(Document doc){
 		if(checkInfoBox(doc)>0) return 0;
-		
+		Elements es = doc.getElementsByClass("main-content");
+		if(es.size() == 0) return 0;
+		Element main_content = es.get(0);
 		if(doc.text().contains("多义词")){
-			Elements es = doc.getElementsByClass("para");
-			for(Element e : es){
-				Log.info(e.text());
-				Log.info(e.getElementsByTag("a").attr("href"));
-			}
-			return es.size();
+			Elements ees = doc.getElementsByClass("para");
+			
+			return ees.size();
 		}
 		return 0;
 	}

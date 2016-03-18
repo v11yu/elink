@@ -32,10 +32,10 @@ public class BaikeEntityInfoSpiderApp {
 	EntityInfoBusiness entityInfoBusiness = new EntityInfoBusinessImpl();
 	Inputer<Pname> inputer = new PnameInputer();
 
-	public void getEntityInfo(Pname pn){
+	public void getEntityInfo(Pname pn,boolean isSub){
 		
-		Log.info("save pname " + pn);
-		String url = ea.getCorrectUrl(pn.getUrl());
+		Log.info("处理实体信息 do get entity info" + pn);
+		String url = ea.getUrlFromPname(pn);
 		EntityInfo en = new EntityInfo();
 		en.setUrl(url);
 		if(entityInfoBusiness.checkEntityExist(en) ){
@@ -47,26 +47,25 @@ public class BaikeEntityInfoSpiderApp {
 		en.setEntity_name(pn.getName());
 		en.setHasInfo(ea.checkInfoBox(doc));
 		en.setSource(doc.html());
-		//subview 就是具体的实体了
-		if(pn.getUrl().contains("subview")) 
-			en.setIsMulti(0);
-		else 
+		if(!isSub){
 			en.setIsMulti(ea.checkMulti(doc));
-		
-		// add multi entity info
-		if(en.getIsMulti()>0){
-			List<Pname> pns = ea.getMulti(doc);
-			en.setMultiUrl(pns);
-			for(Pname p : pns){
-				pnameBusiness.savePname(p);
-				getEntityInfo(p);
+			// add multi entity info
+			if(en.getIsMulti()>0){
+				List<Pname> pns = ea.getMulti(doc);
+				Log.info("出现多义词 "+pns);
+				en.setMultiUrl(pns);
+				for(Pname p : pns){
+					//不对pname再改动
+					//pnameBusiness.savePname(p); 
+					getEntityInfo(p,true);
+				}
 			}
 		}
 		entityInfoBusiness.save(en);
 	}
 	public void work(){
 		for(Pname pn:inputer.getInputData()){
-			getEntityInfo(pn);
+			getEntityInfo(pn,false);
 		}
 	}
 	public static void main(String[] args) {

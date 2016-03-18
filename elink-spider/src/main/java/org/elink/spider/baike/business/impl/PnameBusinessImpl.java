@@ -24,6 +24,7 @@ public class PnameBusinessImpl implements PnameBusiness{
 		try {
 			if(check(p)) return ;
 			pdao.saveAndUpdate(p);
+			Log.info("save Pname to mongoDB "+ p);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
