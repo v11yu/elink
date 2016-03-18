@@ -78,6 +78,6 @@ public class HuDongSpiderApp {
 		
 	}
 	public static void main(String[] args) throws IOException {
-		new HuDongSpiderApp().dfs("计算机安全",null,new ArrayList<String>());
+		new HuDongSpiderApp().dfs("人物",null,new ArrayList<String>());
 	}
 }
