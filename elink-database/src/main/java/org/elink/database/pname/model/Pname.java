@@ -1,5 +1,7 @@
 package org.elink.database.pname.model;
 
+import java.util.List;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 /**
  * 临时存放name的列表
@@ -9,6 +11,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Pname {
 	String name;
 	String url;
+	List<String> tags;
 	public String getName() {
 		return name;
 	}
@@ -20,6 +23,12 @@ public class Pname {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public List<String> getTags() {
+		return tags;
+	}
+	public void setTags(List<String> tags) {
+		this.tags = tags;
 	}
 	@Override
 	public String toString() {

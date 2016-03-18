@@ -20,6 +20,7 @@ public class EntityInfoBusinessImpl implements EntityInfoBusiness{
 	public void save(EntityInfo e) {
 		// TODO Auto-generated method stub
 		try {
+			if(checkEntityExist(e)) return ;
 			edao.saveAndUpdate(e);
 		} catch (Exception e1) {
 			Log.error(e+" "+e1);

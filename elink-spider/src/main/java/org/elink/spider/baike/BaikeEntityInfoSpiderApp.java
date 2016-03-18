@@ -1,5 +1,7 @@
 package org.elink.spider.baike;
 
+import java.util.List;
+
 import org.elink.database.model.EntityInfo;
 import org.elink.database.mongodb.MongoRootConfiguration;
 import org.elink.database.mongodb.repository.impl.BasicRepository;
@@ -10,6 +12,7 @@ import org.elink.spider.baike.business.impl.EntityInfoBusinessImpl;
 import org.elink.spider.baike.business.impl.PnameBusinessImpl;
 import org.elink.spider.baike.input.Inputer;
 import org.elink.spider.baike.input.PnameInputer;
+import org.elink.spider.baike.parser.EntityInfoParser;
 import org.elink.spider.utils.HttpUtils;
 import org.elink.spider.utils.Log;
 import org.jsoup.Jsoup;
@@ -24,21 +27,15 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  *
  */
 public class BaikeEntityInfoSpiderApp {
-	
+	EntityInfoParser ea = new EntityInfoParser();
+	PnameBusiness pnameBusiness = new PnameBusinessImpl();
 	EntityInfoBusiness entityInfoBusiness = new EntityInfoBusinessImpl();
 	Inputer<Pname> inputer = new PnameInputer();
-	public String getCorrectUrl(String url){
-		String preUrl = "http://baike.baidu.com";
-		if(!url.contains(preUrl)) return preUrl+url;
-		return url;
-	}
-	public int checkInfoBox(Document doc){
-		Elements es = doc.getElementsByClass("basic-info");
-		return es.size();
-	}
+
 	public void getEntityInfo(Pname pn){
-		System.out.println(pn.getUrl());
-		String url = getCorrectUrl(pn.getUrl());
+		
+		Log.info("save pname " + pn);
+		String url = ea.getCorrectUrl(pn.getUrl());
 		EntityInfo en = new EntityInfo();
 		en.setUrl(url);
 		if(entityInfoBusiness.checkEntityExist(en) ){
@@ -48,8 +45,23 @@ public class BaikeEntityInfoSpiderApp {
 		Document doc = HttpUtils.getDocument(url);
 		if(doc == null) return ;
 		en.setEntity_name(pn.getName());
-		en.setHasInfo(checkInfoBox(doc));
+		en.setHasInfo(ea.checkInfoBox(doc));
 		en.setSource(doc.html());
+		//subview 就是具体的实体了
+		if(pn.getUrl().contains("subview")) 
+			en.setIsMulti(0);
+		else 
+			en.setIsMulti(ea.checkMulti(doc));
+		
+		// add multi entity info
+		if(en.getIsMulti()>0){
+			List<Pname> pns = ea.getMulti(doc);
+			en.setMultiUrl(pns);
+			for(Pname p : pns){
+				pnameBusiness.savePname(p);
+				getEntityInfo(p);
+			}
+		}
 		entityInfoBusiness.save(en);
 	}
 	public void work(){
