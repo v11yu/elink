@@ -47,9 +47,9 @@ public class EntityInfoParser {
 		Elements es = doc.getElementsByClass("main-content");
 		if(es.size() == 0) return 0;
 		Element main_content = es.get(0);
-		if(doc.text().contains("多义词")){
+		//Log.info(main_content.text());
+		if(main_content.text().contains("多义词") && !main_content.text().contains("词条标签")){
 			Elements ees = doc.getElementsByClass("para");
-			
 			return ees.size();
 		}
 		return 0;

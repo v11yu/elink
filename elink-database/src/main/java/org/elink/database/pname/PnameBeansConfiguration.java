@@ -15,4 +15,5 @@ public class PnameBeansConfiguration {
 	BasicRepository<Pname> pnameDao(){
 		return new BasicRepository<Pname>(Pname.class,pnameConvertor());
 	}
+	
 }

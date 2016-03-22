@@ -19,6 +19,11 @@
 			<artifactId>elink-database</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.ict</groupId>
+			<artifactId>elink-spider</artifactId>
+			<version>${project.version}</version>
+		</dependency>
   		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>

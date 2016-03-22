@@ -2,36 +2,54 @@ package org.elink.database.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 
 public class AttributePairsInfo {
-	String name;
-	String value;
-	String entity_name;
-	ObjectId entity_id;
-	public String getName() {
-		return name;
+	String attrName;
+	String attrValue;
+	String entityName;
+	ObjectId entityId;
+	@Id
+	ObjectId id;
+	public ObjectId getId() {
+		return id;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setId(ObjectId id) {
+		this.id = id;
 	}
-	public String getValue() {
-		return value;
+	public String getAttrName() {
+		return attrName;
 	}
-	public void setValue(String value) {
-		this.value = value;
+
+	public void setAttrName(String attrName) {
+		this.attrName = attrName;
 	}
-	public String getEntity_name() {
-		return entity_name;
+
+	public String getAttrValue() {
+		return attrValue;
 	}
-	public void setEntity_name(String entity_name) {
-		this.entity_name = entity_name;
+
+	public void setAttrValue(String attrValue) {
+		this.attrValue = attrValue;
 	}
-	public ObjectId getEntity_id() {
-		return entity_id;
+
+	public String getEntityName() {
+		return entityName;
 	}
-	public void setEntity_id(ObjectId entity_id) {
-		this.entity_id = entity_id;
+
+	public void setEntityName(String entityName) {
+		this.entityName = entityName;
 	}
+
+	public ObjectId getEntityId() {
+		return entityId;
+	}
+
+	public void setEntityId(ObjectId entityId) {
+		this.entityId = entityId;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

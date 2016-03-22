@@ -6,6 +6,7 @@ import org.elink.database.model.AttributeNameInfo;
 import org.elink.database.model.AttributePairsInfo;
 import org.elink.database.model.EntityInfo;
 import org.elink.database.model.EntitySource;
+import org.elink.database.model.MultiEntityInfo;
 import org.elink.database.model.PageInfo;
 import org.elink.database.mongodb.repository.impl.BasicRepository;
 import org.elink.database.mongodb.repository.impl.DBConvertor;
@@ -74,5 +75,17 @@ public class MongoBeansConfiguration {
 	@Bean
 	BasicRepository<AttributeNameInfo> attributeNameInfoDao(){
 		return new BasicRepository<>(AttributeNameInfo.class, attributeNameInfoConvertor());
+	}
+	
+	/*
+	 * multi entity info
+	 */
+	@Bean
+	DBConvertor<MultiEntityInfo> multiEntityInfoConvertor(){
+		return new DBConvertor<>(MultiEntityInfo.class);
+	}
+	@Bean
+	BasicRepository<MultiEntityInfo> multiEntityInfoDao(){
+		return new BasicRepository<>(MultiEntityInfo.class, multiEntityInfoConvertor());
 	}
 }

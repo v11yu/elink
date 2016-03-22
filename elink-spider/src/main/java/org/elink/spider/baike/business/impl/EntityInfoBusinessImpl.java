@@ -22,7 +22,7 @@ public class EntityInfoBusinessImpl implements EntityInfoBusiness{
 		try {
 			if(checkEntityExist(e)) return ;
 			edao.saveAndUpdate(e);
-			Log.info("save EntityInfo to mongodb "+e);
+			Log.info("save EntityInfo to mongodb "+e.getEntity_name());
 		} catch (Exception e1) {
 			Log.error(e+" "+e1);
 			// TODO Auto-generated catch block
