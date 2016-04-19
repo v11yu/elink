@@ -8,6 +8,7 @@ import org.elink.database.model.EntityInfo;
 import org.elink.database.model.EntitySource;
 import org.elink.database.model.MultiEntityInfo;
 import org.elink.database.model.PageInfo;
+import org.elink.database.model.cluster.AttrInfo;
 import org.elink.database.mongodb.repository.impl.BasicRepository;
 import org.elink.database.mongodb.repository.impl.DBConvertor;
 import org.springframework.context.annotation.Bean;
@@ -88,4 +89,17 @@ public class MongoBeansConfiguration {
 	BasicRepository<MultiEntityInfo> multiEntityInfoDao(){
 		return new BasicRepository<>(MultiEntityInfo.class, multiEntityInfoConvertor());
 	}
+	/*
+	 * multi entity info
+	 */
+	@Bean
+	DBConvertor<AttrInfo> attrInfoConvertor(){
+		return new DBConvertor<>(AttrInfo.class);
+	}
+	@Bean
+	BasicRepository<AttrInfo> attrInfoDao(){
+		return new BasicRepository<>(AttrInfo.class, attrInfoConvertor());
+	}
+	
+	
 }

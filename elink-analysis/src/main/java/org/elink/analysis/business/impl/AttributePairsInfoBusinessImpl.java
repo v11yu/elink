@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.elink.analysis.business.AttributePairsInfoBusiness;
 import org.elink.database.model.AttributePairsInfo;
+import org.elink.database.model.EntityInfo;
 import org.elink.database.mongodb.MongoRootConfiguration;
+import org.elink.database.mongodb.repository.DBQuery;
 import org.elink.database.mongodb.repository.impl.BasicRepository;
 import org.elink.spider.utils.Log;
 import org.springframework.context.ApplicationContext;
@@ -30,5 +32,11 @@ public class AttributePairsInfoBusinessImpl implements AttributePairsInfoBusines
 		// TODO Auto-generated method stub
 		return adao.dbobj2Entity(adao.findByAll());
 	}
-
+	@Override
+	public List<AttributePairsInfo> getbyEid(EntityInfo en){
+		DBQuery query = new DBQuery();
+		query.equalsOperation("entityId", en.getId());
+		return adao.dbobj2Entity(adao.findQuery(query));
+		
+	}
 }

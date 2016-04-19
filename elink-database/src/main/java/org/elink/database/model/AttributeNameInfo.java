@@ -1,5 +1,7 @@
 package org.elink.database.model;
 
+import java.util.List;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -12,8 +14,18 @@ public class AttributeNameInfo {
 	
 	String attrName;
 	Integer attrCount;
+	List<String> attrValues;
 	@Id
 	ObjectId id;
+	
+	public List<String> getAttrValues() {
+		return attrValues;
+	}
+
+	public void setAttrValues(List<String> attrValues) {
+		this.attrValues = attrValues;
+	}
+
 	public ObjectId getId() {
 		return id;
 	}

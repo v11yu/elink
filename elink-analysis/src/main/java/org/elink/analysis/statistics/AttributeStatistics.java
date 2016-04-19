@@ -44,7 +44,6 @@ public class AttributeStatistics {
 	public void sortCount(){
 		List<AttributeNameInfo> res = anb.getAllList();
 		res.sort(new Comparator<AttributeNameInfo>() {
-
 			@Override
 			public int compare(AttributeNameInfo o1, AttributeNameInfo o2) {
 				// TODO Auto-generated method stub

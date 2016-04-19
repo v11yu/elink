@@ -15,8 +15,6 @@ public class PnameRepositoryTest {
 		ApplicationContext context = new AnnotationConfigApplicationContext(MongoRootConfiguration.class);
 		BasicRepository<Pname> pdao = (BasicRepository<Pname>) context.getBean("pnameDao");
 		Pname pn = new Pname();
-		pn.setName("jay");
-		pn.setUrl("ww.bbbb");
-		pdao.saveAndUpdate(pn);
+		System.out.println(pdao.findByAll().size());
 	}
 }
