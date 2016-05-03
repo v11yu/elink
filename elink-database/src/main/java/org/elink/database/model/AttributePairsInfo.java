@@ -8,6 +8,7 @@ public class AttributePairsInfo {
 	String attrName;
 	String attrValue;
 	String entityName;
+	ObjectId attrId;
 	ObjectId entityId;
 	@Id
 	ObjectId id;

@@ -56,7 +56,11 @@ public class AttrClusterApp {
 		AttrInfoBusiness aiz = new AttrInfoBusiness();
 		for(int i =1;i<8;i++){
 			AttrClusterApp acp = new AttrClusterApp();
-			acp.work(0.15+0.01*i);
+			acp.work(0.1+i*0.1);
+		}
+		for(int i =1;i<8;i++){
+			AttrClusterApp acp = new AttrClusterApp();
+			acp.work(0.15+i*0.01);
 		}
 		
 		

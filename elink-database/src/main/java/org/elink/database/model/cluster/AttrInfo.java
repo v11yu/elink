@@ -1,6 +1,8 @@
 package org.elink.database.model.cluster;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 
 import java.util.*;
 /**
@@ -9,6 +11,8 @@ import java.util.*;
  *
  */
 public class AttrInfo {
+	@Id
+	ObjectId id;
 	String attrName;
 	String baiduSearchText;
 	List<String> baiduRecommends;

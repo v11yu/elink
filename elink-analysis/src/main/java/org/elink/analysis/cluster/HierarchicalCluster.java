@@ -99,7 +99,7 @@ public abstract class HierarchicalCluster<T> {
 				for(int j=i+1;j<initSets.size();j++){
 					Set<T> si = initSets.get(i);
 					Set<T> sj = initSets.get(j);
-					double tmpDis = getClosedClusterSimilar(si,sj);
+					double tmpDis = getMeansClusterSimilar(si,sj);
 					if(tmpDis > minDis) {
 						minDis = tmpDis;
 						a = si;

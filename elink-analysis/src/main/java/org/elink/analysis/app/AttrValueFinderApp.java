@@ -26,7 +26,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.mongodb.DBCursor;
 
 /**
- * 用於文本中發現屬性值上下文
+ * 用于文本中发现属性值上下文
  * @author v11
  *
  */
