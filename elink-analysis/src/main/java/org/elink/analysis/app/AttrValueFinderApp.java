@@ -1,6 +1,6 @@
 package org.elink.analysis.app;
 
-import java.util.List;
+import java.util.*;
 
 import org.elink.analysis.business.AttributeNameInfoBusiness;
 import org.elink.analysis.business.AttributePairsInfoBusiness;
@@ -20,6 +20,8 @@ import org.elink.database.mongodb.repository.impl.BasicRepository;
 import org.elink.spider.baike.business.EntityInfoBusiness;
 import org.elink.spider.baike.business.impl.EntityInfoBusinessImpl;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -37,68 +39,106 @@ public class AttrValueFinderApp {
 	BasicRepository<EntityInfo> edao = (BasicRepository<EntityInfo>) context.getBean("entityInfoDao");
 	AttributePairsInfoBusiness attrPairsBusiness = new AttributePairsInfoBusinessImpl();
 	TextParser testParser = new TextParser();
-	String basePath = "D:\\wwy毕业相关\\output\\";
-	String contextPath ;
-	String upPath;
-	String downPath;
-	int trainNum;
-	int windowSize;
+	//String basePath = "D:\\wwy毕业相关\\output\\";
+
 	public AttrValueFinderApp(){
-		this(200,10);
-	}
-	public AttrValueFinderApp(int trainNum,int windowSize){
-		this.trainNum = trainNum;
-		this.windowSize = windowSize;
-		
-	}
-	
-	public void findContext(String keyword,int windowSize){
-		
-	}
-	public List<Attr> getAttrs(EntityInfo en){
-		AbstractAttrMethod attrMethod = new InfoBoxAttrMethod();
-		List<Attr> attrs = attrMethod.getAttr(en.getSource());
-		return attrs;
 	}
 	public List<AttributePairsInfo> getAttrPairsInfos(EntityInfo en){
-		
 		return attrPairsBusiness.getbyEid(en);
 	}
-	public void work(String attrName){
-		contextPath = basePath + attrName+"_context.txt";
-		upPath = basePath + attrName+"_up.txt";
-		downPath = basePath + attrName+"_down.txt";
-		// get [trainNum] entity
-		int cnt = 0;
+
+	/**
+	 * 生成上下午语料程序
+	 * @param trainNum 抽取的百科实体数量
+	 * @param windowSize 上下文窗口大小,上文下文各windowSize的长度
+	 * @param topNum 排名前top数量的属性名
+	 * @param basePath 存储的路径
+	 */
+	public void work(int trainNum,int windowSize,int topNum,String basePath){
+		List<String> attrs = getTopList(topNum);
+		
+		Map<String, List<String>> mp = new HashMap<String, List<String>>();
 		DBCursor cursor = edao.findByAll();
+		int noInfobox = 0;
+		int cnt = 0;
 		while(cursor.hasNext()){
-			if(cnt> trainNum) break;
 			EntityInfo en = edao.obj2Entity(cursor.next());
 			if(en.getHasInfo() == 0) {
 				Log.info(en.getEntity_name()+" 没有infobox");
+				noInfobox++;
 				continue;
 			}
-			String value = null;
-			List<AttributePairsInfo> attrs = getAttrPairsInfos(en);
-			for(AttributePairsInfo attr : attrs){
-				if(attr.getAttrName().equals(attrName)){
-					value = attr.getAttrValue();
-					break;
+			String text = getText(en.getSource());//实体正文文本
+			List<AttributePairsInfo> aps = getAttrPairsInfos(en);
+			for(String attr:attrs){
+				String contextPath = basePath  +attr+"_context.txt";
+				String value = null;
+				for(AttributePairsInfo ap : aps){
+					if(ap.getAttrName().equals(attr)){
+						value = ap.getAttrValue();
+						break;
+					}
 				}
+				if(value == null) continue;
+				try{
+					List<String> res = testParser.getContext(text, value,windowSize);
+					FileWriteTools.write(res, contextPath);
+				}catch(Exception e){
+					e.printStackTrace();
+					Log.error(en.getEntity_name()+" "+attr+" "+value+" "+text);
+				}
+				
 			}
-			if(value == null) continue;
-			List<String> res = testParser.getContext(Jsoup.parse(en.getSource()).text(), value,windowSize);
-			FileWriteTools.write(res, contextPath);
-			res = testParser.getContextByUp(Jsoup.parse(en.getSource()).text(), value,windowSize);
-			FileWriteTools.write(res, upPath);
-			res = testParser.getContextByDown(Jsoup.parse(en.getSource()).text(), value,windowSize);
-			FileWriteTools.write(res, downPath);
-			cnt++;
 			
+			if(cnt++> trainNum) break;	
 		}
 		
+		Log.info("抽取实体总数:"+trainNum+" noInfobox没有信息框实体:"+noInfobox);
+		
+	}
+	/**
+	 * 从百科页面中获取描述性文本正文内容
+	 * @param doc
+	 * @return
+	 */
+	String getText(String doc){
+		Elements es = Jsoup.parse(doc).getElementsByClass("para");
+		String res = "";
+		for(Element e:es){
+			res+=e.text();
+			//System.out.println(e.text());
+		}
+		System.out.println(res.length());
+		System.out.println(Jsoup.parse(doc).text().length());
+		return res;
+		
+	}
+	/**
+	 * 获取top属性名列表
+	 * @param topNum top排名的数值
+	 * @return
+	 */
+	List<String> getTopList(int topNum){
+		List<String> res = new ArrayList<String>();
+		List<AttributeNameInfo> attrs = anb.getAllList();
+		Collections.sort(attrs, new Comparator<AttributeNameInfo>() {
+			@Override
+			public int compare(AttributeNameInfo o1, AttributeNameInfo o2) {
+				// TODO Auto-generated method stub
+				return o2.getAttrCount()-o1.getAttrCount();
+			}
+		});
+		int cnt = 0;
+		for(AttributeNameInfo attr:attrs){
+			res.add(attr.getAttrName());
+			Log.info(attr);
+			if(++cnt  >= topNum) break;
+		}
+		return res;
 	}
 	public static void main(String[] args) {
-		new AttrValueFinderApp().work("民    族");
+		Date date = new Date();
+		new AttrValueFinderApp().work(100,20,20,"/Users/v11/Documents/毕业文档/output/attr_content/");
+		Log.info("run the app using time:"+(new Date().getTime()-date.getTime())/1000);
 	}
 }

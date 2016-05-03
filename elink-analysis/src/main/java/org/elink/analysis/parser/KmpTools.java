@@ -12,13 +12,12 @@ public class KmpTools {
 		this.value = value;
 	}
 	void getNext(){
-		next[0]=0;
-		next[1]=0;
-		int i=1,j=next[1];
+		next[0]=-1;
+		int i=0,j=-1;
 		int length = value.length();
 		char t[] = value.toCharArray();
 		while(i<length){
-			if(j==0||t[i]==t[j]){
+			if(j==-1||t[i]==t[j]){
 				i++;j++;
 				next[i]=j;
 			}else j = next[j];
@@ -30,11 +29,11 @@ public class KmpTools {
 		int length = context.length()-1;
 		int matLen = value.length()-1;
 		if(length<matLen) return res;
-		int i=1,j=1,count = 0;
+		int i=0,j=0,count = 0;
 		char s[] = context.toCharArray();
 		char t[] = value.toCharArray();
 		while(i<=length){
-			if(j==0||s[i]==t[j]){
+			if(j==-1||s[i]==t[j]){
 				i++;
 				j++;
 			}
@@ -48,7 +47,7 @@ public class KmpTools {
 	}
 	public static void main(String[] args) {
 		String context = "中国人在中国";
-		String value = "中国";
+		String value = "中国人";
 		KmpTools kt = new KmpTools(context, value);
 		System.out.println(kt.kmpGetIndex());
 	}
