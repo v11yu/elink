@@ -12,6 +12,7 @@ $RECYCLE.BIN/
 *.classpath
 *.cab
 *.msi
+*.log
 *.msm
 *.msp
 *.project
