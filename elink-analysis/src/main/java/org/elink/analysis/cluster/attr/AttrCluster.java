@@ -11,6 +11,7 @@ import org.elink.database.utils.Log;
 
 public class AttrCluster extends HierarchicalCluster<AttrInfo>{
 	double getAttrNameSimilar(AttrInfo a,AttrInfo b){
+		if(a.getAttrName().length() == 0 || b.getAttrName().length() == 0) return 0;
 		int lcs = CommonTools.LCS(a.getAttrName(), b.getAttrName());
 		return 1.0*lcs / Math.min(a.getAttrName().length(),b.getAttrName().length());
 	}
@@ -65,6 +66,7 @@ public class AttrCluster extends HierarchicalCluster<AttrInfo>{
 		double res = stringNameSimi+baikeListSimi+baikeRecomSimi+baiduText;
 		res /=4;
 		//Log.info(stringNameSimi+" "+baikeListSimi+" "+baikeRecomSimi+" "+baiduText+" "+res);
+		if(res == Double.NaN) return 0;
 		return res;
 	}
 	@Override

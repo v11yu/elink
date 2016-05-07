@@ -8,6 +8,7 @@ import org.elink.database.model.EntityInfo;
 import org.elink.database.model.EntitySource;
 import org.elink.database.model.MultiEntityInfo;
 import org.elink.database.model.PageInfo;
+import org.elink.database.model.TemplateInfo;
 import org.elink.database.model.cluster.AttrInfo;
 import org.elink.database.mongodb.repository.impl.BasicRepository;
 import org.elink.database.mongodb.repository.impl.DBConvertor;
@@ -101,5 +102,16 @@ public class MongoBeansConfiguration {
 		return new BasicRepository<>(AttrInfo.class, attrInfoConvertor());
 	}
 	
+	/*
+	 * attribute template
+	 */
+	@Bean
+	DBConvertor<TemplateInfo> templateInfoConvertor(){
+		return new DBConvertor<>(TemplateInfo.class);
+	}
+	@Bean
+	BasicRepository<TemplateInfo> templateInfoDao(){
+		return new BasicRepository<>(TemplateInfo.class, templateInfoConvertor());
+	}
 	
 }

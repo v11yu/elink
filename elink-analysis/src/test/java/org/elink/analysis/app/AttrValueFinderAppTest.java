@@ -2,6 +2,8 @@ package org.elink.analysis.app;
 
 import java.util.*;
 
+import org.elink.analysis.app.first.AttrValueFinderApp;
+
 public class AttrValueFinderAppTest {
 	void testTop(){
 		AttrValueFinderApp af = new AttrValueFinderApp();
